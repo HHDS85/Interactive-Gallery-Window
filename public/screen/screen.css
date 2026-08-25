@@ -1,0 +1,415 @@
+/* GALLERY WINDOW SCREEN — the stage. Art first, almost no UI. */
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  cursor: none; /* kiosk */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.window {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+}
+
+/* ------------------------------------------------ artwork layers */
+
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1400ms var(--ease);
+  will-change: opacity;
+}
+
+.layer.visible {
+  opacity: 1;
+}
+
+.layer img {
+  position: absolute;
+  top: 7vh;
+  left: 6vw;
+  width: 88vw;
+  height: 74vh;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 80px rgba(0, 0, 0, 0.55));
+}
+
+/* slow cinema: ken burns during idle dwell */
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.045);
+  }
+}
+
+.layer img.kb {
+  animation: kenburns 16s linear forwards;
+}
+
+.layer img.kb-alt {
+  transform-origin: 30% 70%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer img.kb {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------ frame furniture */
+
+.brand {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  display: flex;
+  align-items: baseline;
+  gap: 1.4em;
+  opacity: 0.66;
+  z-index: 4;
+}
+
+.brand-sub {
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.index {
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  z-index: 4;
+}
+
+/* caption — the wall text */
+
+.caption {
+  position: absolute;
+  left: 5vw;
+  bottom: 6vh;
+  max-width: 44vw;
+  z-index: 4;
+}
+
+.caption.refresh > * {
+  animation: cap-rise 700ms var(--ease) 250ms both;
+}
+
+@keyframes cap-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.caption-artist {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.1vh;
+}
+
+.caption-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.4vh;
+}
+
+.caption-meta {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.caption-price {
+  margin-top: 1.6vh;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.caption-price.hidden {
+  display: none;
+}
+
+/* QR wall label */
+
+.qr-label {
+  position: absolute;
+  right: 5vw;
+  bottom: 6vh;
+  background: var(--label-bg);
+  color: var(--label-ink);
+  padding: 14px 14px 12px;
+  width: 148px;
+  border-radius: 2px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  opacity: 0.94;
+  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+  z-index: 4;
+}
+
+.qr-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--label-bg);
+}
+
+.qr-caption {
+  margin-top: 10px;
+  display: grid;
+  gap: 2px;
+}
+
+.qr-caption strong {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.qr-caption span {
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  color: rgba(10, 10, 11, 0.55);
+}
+
+.qr-label.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+/* live tag — replaces the QR label while someone controls */
+
+.live-tag {
+  position: absolute;
+  right: 5vw;
+  bottom: 6vh;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 800ms var(--ease);
+  z-index: 4;
+}
+
+.live-tag.visible {
+  opacity: 1;
+}
+
+/* idle progress hairline */
+
+.progress {
+  position: absolute;
+  left: 5vw;
+  right: 5vw;
+  bottom: 3.2vh;
+  height: 1px;
+  background: var(--hairline);
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 600ms var(--ease);
+  z-index: 4;
+}
+
+.progress.hidden {
+  opacity: 0;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: var(--muted);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.progress span.run {
+  animation: fill linear forwards;
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ------------------------------------------------ CTA interstitial */
+
+.cta {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6vh;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1200ms var(--ease);
+  z-index: 6;
+}
+
+.cta.visible {
+  opacity: 1;
+}
+
+.cta-head {
+  display: grid;
+  gap: 1vh;
+  font-weight: 500;
+}
+
+.cta-line {
+  display: block;
+  font-size: clamp(3rem, 7.4vw, 8.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cta-line-serif {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: clamp(3.4rem, 8.4vw, 9.5rem);
+}
+
+.qr-label-large {
+  position: static;
+  width: 208px;
+  padding: 18px 18px 16px;
+}
+
+.qr-label-large .qr-caption strong {
+  font-size: 0.625rem;
+}
+
+.qr-label-large .qr-caption span {
+  font-size: 0.625rem;
+}
+
+/* staggered entrance when the CTA takes the stage */
+
+.cta.visible .cta-item {
+  animation: cta-rise 900ms var(--ease) both;
+}
+
+.cta.visible .cta-item:nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.cta.visible .cta-head .cta-item:nth-child(1) {
+  animation-delay: 160ms;
+}
+
+.cta.visible .cta-head .cta-item:nth-child(2) {
+  animation-delay: 260ms;
+}
+
+.cta.visible > .cta-item:last-child {
+  animation-delay: 420ms;
+}
+
+@keyframes cta-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------------------ connected flash */
+
+.flash {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 11, 0.58);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms var(--ease);
+  z-index: 8;
+}
+
+.flash span {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(3.4rem, 8vw, 8rem);
+  transform: translateY(14px);
+  transition: transform 600ms var(--ease);
+}
+
+.flash.visible {
+  opacity: 1;
+}
+
+.flash.visible span {
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------ connection state */
+
+.offline-dot {
+  position: absolute;
+  left: 5vw;
+  bottom: 3.1vh;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--warn);
+  opacity: 0;
+  transition: opacity 400ms;
+  z-index: 5;
+}
+
+.offline-dot.visible {
+  opacity: 0.8;
+  animation: pulse 2s ease-in-out infinite;
+}

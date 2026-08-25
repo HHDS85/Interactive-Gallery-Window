@@ -1,0 +1,117 @@
+/* INTERACTIVE GALLERY WINDOW — shared design tokens
+   Dark canvas, warm ink, no accent colour: the colour comes from the work. */
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #121214;
+  --ink: #f2efe9;
+  --ink-85: rgba(242, 239, 233, 0.85);
+  --muted: rgba(242, 239, 233, 0.55);
+  --faint: rgba(242, 239, 233, 0.32);
+  --hairline: rgba(242, 239, 233, 0.14);
+  --label-bg: #f2efe9;
+  --label-ink: #0a0a0b;
+  --live: #3fd68c;
+  --warn: #e8b34c;
+
+  --serif: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+  --sans: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* voice */
+
+.eyebrow {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.wordmark {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.52em;
+  text-transform: uppercase;
+}
+
+.wordmark small {
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  color: var(--faint);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--faint);
+  display: inline-block;
+}
+
+.dot.is-live {
+  background: var(--live);
+  box-shadow: 0 0 12px rgba(63, 214, 140, 0.55);
+}
+
+.dot.is-warn {
+  background: var(--warn);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.pulsing {
+  animation: pulse 2.4s ease-in-out infinite;
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery Window</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/shared.css" />
+  <link rel="stylesheet" href="/screen/screen.css" />
+</head>
+<body>
+  <main class="window" id="window">
+    <!-- artwork stage: two layers crossfade -->
+    <div class="layer" id="layerA"><img alt="" draggable="false" /></div>
+    <div class="layer" id="layerB"><img alt="" draggable="false" /></div>
+
+    <!-- frame furniture -->
+    <header class="brand">
+      <span class="wordmark" id="brandName">···</span>
+      <span class="brand-sub" id="brandSub"></span>
+    </header>
+
+    <div class="index" id="index"></div>
+
+    <div class="caption" id="caption">
+      <div class="caption-artist" id="capArtist"></div>
+      <h1 class="caption-title" id="capTitle"></h1>
+      <div class="caption-meta" id="capMeta"></div>
+      <div class="caption-price" id="capPrice">Price on request</div>
+    </div>
+
+    <!-- QR wall label (idle only) -->
+    <aside class="qr-label" id="qrLabel">
+      <img class="qr-img" id="qrImg" alt="QR code — scan to control this window" />
+      <div class="qr-caption">
+        <strong>Take control</strong>
+        <span>Scan to explore.</span>
+      </div>
+    </aside>
+
+    <!-- live tag (active mode) -->
+    <div class="live-tag" id="liveTag">
+      <span class="dot is-live pulsing"></span>
+      <span>Live</span>
+    </div>
+
+    <!-- idle progress hairline -->
+    <div class="progress" id="progress"><span id="progressBar"></span></div>
+
+    <!-- CTA interstitial -->
+    <section class="cta" id="cta" aria-hidden="true">
+      <p class="eyebrow cta-item">The window is the interface</p>
+      <h2 class="cta-head">
+        <span class="cta-line cta-item">Don&rsquo;t just look.</span>
+        <span class="cta-line cta-line-serif cta-item">Take control.</span>
+      </h2>
+      <div class="qr-label qr-label-large cta-item">
+        <img class="qr-img" id="qrImgLarge" alt="QR code — scan to control this window" />
+        <div class="qr-caption">
+          <strong>Scan to explore the gallery</strong>
+          <span>No app. No sign-up.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- connected flash -->
+    <div class="flash" id="flash"><span>Connected</span></div>
+
+    <!-- connection state -->
+    <div class="offline-dot" id="offlineDot" title="reconnecting"></div>
+  </main>
+
+  <script src="/screen/screen.js"></script>
+</body>
+</html>
