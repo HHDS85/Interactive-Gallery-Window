@@ -1,0 +1,22 @@
+{
+  "screens": [
+    {
+      "id": "gallery-hamburg-window-01",
+      "label": "Window 01 · Hamburg",
+      "gallery": "BUKO",
+      "galleryClaim": "Interactive Gallery Window",
+      "playlist": [
+        "nocturne-in-magenta",
+        "undertow",
+        "deep-field",
+        "heat-bloom",
+        "ember-current"
+      ],
+      "idleDwellMs": 12000,
+      "ctaDwellMs": 9000,
+      "ctaEvery": 3,
+      "sessionTimeoutMs": 75000,
+      "sessionWarningMs": 30000
+    }
+  ]
+}

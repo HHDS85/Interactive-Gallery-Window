@@ -1,0 +1,83 @@
+{
+  "artists": [
+    {
+      "id": "buko",
+      "name": "Buko",
+      "bio": "Buko is a Hamburg-based painter working in layered, fluid acrylics. The works emerge in sessions of pouring, dragging and interruption — pigment moving like weather across the canvas, arrested at the moment it turns from chaos into composition. Seen from a distance they read as landscapes of light; up close they dissolve into currents, sediment and sparks.",
+      "instagram": "https://www.instagram.com/your-artist-handle",
+      "url": ""
+    }
+  ],
+  "artworks": [
+    {
+      "id": "nocturne-in-magenta",
+      "artistId": "buko",
+      "title": "Nocturne in Magenta",
+      "year": 2025,
+      "medium": "Acrylic and ink on canvas",
+      "dimensions": "190 × 160 cm",
+      "image": "/artworks/nocturne-in-magenta.jpg",
+      "description": "A nocturnal colour field caught between violet dusk and cold turquoise ground. Coral flares break through the surface like signals — the painting holds the exact moment a night sky touches water.",
+      "price": null,
+      "priceOnRequest": true,
+      "available": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "undertow",
+      "artistId": "buko",
+      "title": "Undertow",
+      "year": 2024,
+      "medium": "Acrylic and lacquer on canvas",
+      "dimensions": "160 × 90 cm",
+      "image": "/artworks/undertow.jpg",
+      "description": "Deep marine blues pull against fields of hot red and orange in a slow, submerged rotation. Traces of white lacquer sit on the surface like foam — evidence of a current you can feel but never see.",
+      "price": null,
+      "priceOnRequest": true,
+      "available": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "deep-field",
+      "artistId": "buko",
+      "title": "Deep Field",
+      "year": 2024,
+      "medium": "Acrylic on canvas",
+      "dimensions": "160 × 110 cm",
+      "image": "/artworks/deep-field.jpg",
+      "description": "Named after the long-exposure photographs of the far universe, Deep Field layers cobalt, violet and ember into a slow drift of matter. Splattered whites hang in the dark like starlight arriving late.",
+      "price": null,
+      "priceOnRequest": true,
+      "available": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "heat-bloom",
+      "artistId": "buko",
+      "title": "Heat Bloom",
+      "year": 2024,
+      "medium": "Acrylic and pigment on canvas",
+      "dimensions": "120 × 180 cm",
+      "image": "/artworks/heat-bloom.jpg",
+      "description": "Magenta and violet open across the canvas like heat rising off asphalt at the end of summer. A seam of yellow and teal at the edge keeps the temperature honest — bloom and burn in one gesture.",
+      "price": null,
+      "priceOnRequest": true,
+      "available": true,
+      "sortOrder": 4
+    },
+    {
+      "id": "ember-current",
+      "artistId": "buko",
+      "title": "Ember Current",
+      "year": 2023,
+      "medium": "Acrylic on canvas",
+      "dimensions": "110 × 170 cm",
+      "image": "/artworks/ember-current.jpg",
+      "description": "Islands of orange and red ember float on a near-black tide, connected by threads of white spray. The darkest painting of the series — and the one that glows longest after you look away.",
+      "price": null,
+      "priceOnRequest": true,
+      "available": true,
+      "sortOrder": 5
+    }
+  ]
+}
