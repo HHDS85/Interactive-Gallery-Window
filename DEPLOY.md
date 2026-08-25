@@ -14,16 +14,17 @@ Gleicher Komfort wie Netlify (GitHub verbinden → Auto-Deploy bei jedem Push), 
 
 | Anbieter | Setup | Hinweis |
 |---|---|---|
-| **Render** | *New → Web Service → GitHub-Repo wählen* (erkennt das Dockerfile) | Free-Tier schläft nach Inaktivität (erster Scan dann ~30–60 s langsam) — für ein echtes Schaufenster den kleinsten Paid-Tier nehmen |
+| **Render** ⭐ | *New → Blueprint → Repo wählen → Apply* (nutzt [render.yaml](render.yaml)) | Free-Tier schläft nach Inaktivität (erster Scan dann ~30–60 s langsam) — für ein echtes Schaufenster den kleinsten Paid-Tier nehmen |
 | **Railway** | *New Project → Deploy from GitHub repo* | sehr schnelles Setup, usage-based |
 | **Fly.io** | `fly launch` (nutzt das Dockerfile) | am flexibelsten, CLI-basiert |
 
-**Nach dem ersten Deploy zwei Environment-Variablen setzen:**
+**Render, Schritt für Schritt (einmalig, ~2 Minuten):**
 
-```
-BASE_URL=https://<deine-app-url>        # damit die QR-Codes öffentlich auflösen
-PORT=4680                                # bzw. den vom Host vorgegebenen Port übernehmen
-```
+1. [dashboard.render.com](https://dashboard.render.com) → *Sign in with GitHub* (Account mit Zugriff auf `HHDS85/Interactive-Gallery-Window`).
+2. *New → Blueprint* → Repo `Interactive-Gallery-Window` wählen → *Apply*.
+3. Warten bis der Build grün ist → die `https://….onrender.com`-URL ist Screen + Controller + API in einem.
+
+Ab dann deployt **jeder Push auf `main` automatisch**. Environment-Variablen sind nicht nötig: `PORT` setzt Render selbst, und die **QR-Codes leiten ihre öffentliche URL automatisch aus dem Request ab** (`BASE_URL` bleibt als optionaler Override, z. B. für eine eigene Domain).
 
 Wichtig zu wissen:
 
@@ -43,4 +44,4 @@ npm start
 ssh -R 80:localhost:4680 nokey@localhost.run
 ```
 
-Der Tunnel druckt eine `https://….lhr.life`-URL. Server mit `BASE_URL=<tunnel-url> npm start` neu starten, damit der QR-Code auf die öffentliche URL zeigt. Die URL lebt, solange der SSH-Prozess läuft, und wechselt bei jedem Neustart.
+Der Tunnel druckt eine `https://….lhr.life`-URL — Screen und Controller darüber öffnen, fertig: Der QR-Code zeigt automatisch auf die Tunnel-URL (Host-Ableitung). Die URL lebt, solange der SSH-Prozess läuft, und wechselt bei jedem Neustart.

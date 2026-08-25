@@ -331,14 +331,18 @@ app.get('/api/stats', (_req, res) => {
 app.get('/qr/:screenId.svg', async (req, res) => {
   const room = rooms.get(req.params.screenId);
   if (!room) return res.status(404).end();
-  const url = `${baseUrl()}/control/${room.config.id}?src=qr`;
+  const url = `${requestBase(req)}/control/${room.config.id}?src=qr`;
   const svg = await QRCode.toString(url, {
     type: 'svg',
     errorCorrectionLevel: 'M',
     margin: 0,
     color: { dark: '#0A0A0Bff', light: '#00000000' },
   });
-  res.type('image/svg+xml').setHeader('Cache-Control', 'no-store').send(svg);
+  res
+    .type('image/svg+xml')
+    .setHeader('Cache-Control', 'no-store')
+    .setHeader('X-QR-Target', url) // debug/verification aid — the URL encoded in the QR
+    .send(svg);
 });
 
 /* ------------------------------------------------------------- websocket */
@@ -432,6 +436,21 @@ function lanAddress() {
 
 function baseUrl() {
   return BASE_URL || `http://${lanAddress()}:${PORT}`;
+}
+
+/* Public base for QR codes: explicit BASE_URL wins; otherwise derive it from
+   the incoming request (works unchanged behind Render/Railway/tunnels — the
+   QR always points at whatever host the screen was opened from). */
+function requestBase(req) {
+  if (BASE_URL) return BASE_URL;
+  const host = req.get('host');
+  if (!host) return baseUrl();
+  let proto = (req.get('x-forwarded-proto') || req.protocol || 'http').split(',')[0];
+  // public hostnames are always TLS in this product (Render, tunnels, domains);
+  // some tunnels terminate TLS without setting x-forwarded-proto
+  const isLocal = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(host);
+  if (!isLocal) proto = 'https';
+  return `${proto}://${host}`;
 }
 
 server.listen(PORT, () => {

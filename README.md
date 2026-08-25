@@ -32,7 +32,7 @@ backstage  http://<lan-ip>:4680/
 | Env var | Default | Purpose |
 |---|---|---|
 | `PORT` | `4680` | HTTP + WebSocket port |
-| `BASE_URL` | LAN IP | Public base URL encoded in the QR (set when deployed/tunneled) |
+| `BASE_URL` | *(auto)* | Optional override for the QR target — by default the QR derives its public URL from the request host (works behind Render/tunnels unchanged) |
 | `SESSION_TIMEOUT_MS` | `75000` | Controller inactivity timeout |
 | `SESSION_WARNING_MS` | `30000` | "Still exploring?" lead time before timeout |
 

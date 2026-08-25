@@ -1,0 +1,9 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploy: render.com → New → Blueprint → select this repo → Apply.
+services:
+  - type: web
+    name: interactive-gallery-window
+    runtime: docker
+    plan: free # sleeps when idle; upgrade for a real shop window
+    healthCheckPath: /api/screens
+    autoDeploy: true
