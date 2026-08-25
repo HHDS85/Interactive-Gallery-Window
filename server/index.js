@@ -355,8 +355,8 @@ wss.on('connection', (ws, req) => {
   room.sockets.add(ws);
 
   send(ws, {
-    type: 'init',
     ...statePayload(room),
+    type: 'init', // after the spread — statePayload carries type:'state'
     screen: { id: room.config.id, label: room.config.label, gallery: room.config.gallery },
     you: { role: ws.meta.role, sessionId: ws.meta.sessionId },
   });
