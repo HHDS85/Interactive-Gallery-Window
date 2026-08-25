@@ -1,0 +1,10 @@
+# dependencies
+node_modules/
+
+# runtime data (leads, analytics events)
+data/
+
+# local tooling
+.claude/
+.DS_Store
+*.log
