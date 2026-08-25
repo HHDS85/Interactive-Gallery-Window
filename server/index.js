@@ -240,7 +240,9 @@ const server = http.createServer(app);
 app.use(express.json({ limit: '64kb' }));
 app.use(express.text({ type: ['text/*'], limit: '64kb' })); // sendBeacon fallback
 
-app.use(express.static(path.join(ROOT, 'public'), { maxAge: '1h', index: false }));
+// no HTTP caching while the product iterates — a kiosk deployment can
+// raise this again (assets are LAN-local anyway)
+app.use(express.static(path.join(ROOT, 'public'), { maxAge: 0, index: false }));
 
 app.get('/', (_req, res) => res.sendFile(path.join(ROOT, 'public', 'index.html')));
 app.get('/screen/:screenId', (_req, res) => res.sendFile(path.join(ROOT, 'public', 'screen', 'index.html')));

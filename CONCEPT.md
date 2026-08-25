@@ -309,6 +309,8 @@ Keine Akzentfarbe. **Die Farbe kommt aus dem Werk.** Ein einzelner Status-Punkt 
 
 **QR als Wandlabel:** Der Code sitzt auf einer kleinen warmweißen Fläche mit Caption-Zeile — zitiert das klassische Galerie-Wandschild und bleibt dadurch maximal scanbar (dunkle Module auf hellem Grund).
 
+**Produkt-Branding:** Jede Fläche trägt dezent das Urban-Artist-Club-Badge mit der Zeile `EIN PRODUKT BY URBAN ARTIST CLUB` — auf dem Screen mittig oben wie eine Plakette (auch über dem CTA-Interstitial), auf dem Phone im Footer, im Backstage ebenso. Monochrom in `--ink`, nie lauter als die Kunst. Die Galerie-Marke (z. B. BUKO) bleibt Absender des Inhalts; Urban Artist Club ist Absender des Produkts.
+
 ---
 
 ## 11 · Animation / Transition Behaviour

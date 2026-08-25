@@ -290,6 +290,12 @@ body {
   max-width: 34ch;
 }
 
+.foot-credit {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
 /* ------------------------------------------------------------ buttons */
 
 .solid-btn {

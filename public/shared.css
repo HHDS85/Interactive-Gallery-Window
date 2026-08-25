@@ -115,3 +115,25 @@ a {
 .pulsing {
   animation: pulse 2.4s ease-in-out infinite;
 }
+
+/* product credit — Ein Produkt by Urban Artist Club */
+
+.product-credit {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.product-credit img {
+  width: 27px;
+  height: 27px;
+}
+
+.product-credit span {
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+}

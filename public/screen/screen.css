@@ -362,6 +362,36 @@ body {
   }
 }
 
+/* ------------------------------------------------ product credit */
+
+.screen-credit {
+  position: absolute;
+  top: 4.4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.55;
+  z-index: 7; /* stays visible on the CTA interstitial */
+}
+
+.screen-credit img {
+  width: 30px;
+  height: 30px;
+}
+
+/* narrow windows: reduce the top line gracefully */
+
+@media (max-width: 1199px) {
+  .brand-sub {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .screen-credit span {
+    display: none;
+  }
+}
+
 /* ------------------------------------------------ connected flash */
 
 .flash {
