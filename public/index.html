@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive Gallery Window — Backstage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/shared.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 5vh 6vw;
+    }
+    header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.6em;
+      margin-bottom: 10vh;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 1.05;
+      max-width: 18ch;
+      margin-bottom: 1.2rem;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      max-width: 52ch;
+      margin-bottom: 7vh;
+    }
+    .windows {
+      border-top: 1px solid var(--hairline);
+      max-width: 720px;
+    }
+    .win {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 22px 2px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .win-name {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .win-meta {
+      font-size: 0.75rem;
+      color: var(--faint);
+      letter-spacing: 0.06em;
+      margin-top: 5px;
+    }
+    .win-links {
+      display: flex;
+      gap: 26px;
+    }
+    .win-links a {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 4px;
+      transition: color 200ms, border-color 200ms;
+    }
+    .win-links a:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    footer {
+      margin-top: auto;
+      padding-top: 8vh;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 40px;
+      font-size: 0.6875rem;
+      color: var(--faint);
+      letter-spacing: 0.08em;
+    }
+    footer a {
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="wordmark">Interactive Gallery Window</span>
+    <span class="eyebrow">Backstage</span>
+  </header>
+
+  <h1>Public screen. Private&nbsp;control.</h1>
+  <p class="sub">
+    Open a window on the large display, then scan its QR code with a phone —
+    or open the controller link on a second device. This page is the prototype's
+    backstage; passers-by never see it.
+  </p>
+
+  <div class="windows" id="windows"></div>
+
+  <footer>
+    <span>Prototype · no accounts, no tracking beyond the event log</span>
+    <a href="/api/stats">stats</a>
+  </footer>
+
+  <script>
+    fetch('/api/screens')
+      .then((r) => r.json())
+      .then(({ screens }) => {
+        document.getElementById('windows').innerHTML = screens
+          .map(
+            (s) => `
+          <div class="win">
+            <div>
+              <div class="win-name">${s.gallery} — ${s.label}</div>
+              <div class="win-meta">${s.works} works · ${s.id}</div>
+            </div>
+            <div class="win-links">
+              <a href="/screen/${s.id}">Open window</a>
+              <a href="/control/${s.id}">Open controller</a>
+            </div>
+          </div>`
+          )
+          .join('');
+      });
+  </script>
+</body>
+</html>

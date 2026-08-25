@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <title>You're in control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/shared.css" />
+  <link rel="stylesheet" href="/control/control.css" />
+</head>
+<body>
+  <!-- connect splash -->
+  <div class="splash" id="splash">
+    <p class="eyebrow" id="splashEyebrow">Connecting</p>
+    <h1 class="splash-head" id="splashHead">&nbsp;</h1>
+  </div>
+
+  <header class="top">
+    <div class="wordmark" id="brand">···</div>
+    <div class="status">
+      <span class="dot" id="statusDot"></span>
+      <span class="status-text" id="statusText">Connecting</span>
+    </div>
+  </header>
+
+  <!-- viewer banner / take control -->
+  <div class="viewer-banner hidden" id="viewerBanner">
+    <div class="vb-note" id="vbNote">
+      <span class="dot pulsing"></span>
+      <span>Someone is currently exploring the window.</span>
+    </div>
+    <button class="solid-btn hidden" id="vbClaim">Take control</button>
+  </div>
+
+  <main class="content">
+    <section class="stage" id="stage">
+      <div class="swiper" id="swiper">
+        <img id="artImg" alt="" draggable="false" />
+      </div>
+    </section>
+
+    <nav class="pager">
+      <button class="pager-btn" id="prevBtn">&larr;&ensp;Previous</button>
+      <span class="pager-index" id="pagerIndex"></span>
+      <button class="pager-btn" id="nextBtn">Next&ensp;&rarr;</button>
+    </nav>
+
+    <section class="caption">
+      <div class="caption-artist" id="capArtist"></div>
+      <h2 class="caption-title" id="capTitle"></h2>
+      <div class="caption-meta" id="capMeta"></div>
+      <div class="caption-price" id="capPrice">Price on request</div>
+    </section>
+
+    <section class="actions">
+      <div class="action">
+        <button class="action-row" id="rowAbout" aria-expanded="false">
+          <span>About the work</span><span class="action-mark">+</span>
+        </button>
+        <div class="action-body" id="bodyAbout"><p id="aboutText"></p></div>
+      </div>
+
+      <div class="action">
+        <button class="action-row" id="rowArtist" aria-expanded="false">
+          <span>The artist</span><span class="action-mark">+</span>
+        </button>
+        <div class="action-body" id="bodyArtist">
+          <p id="artistText"></p>
+          <a class="action-sublink hidden" id="artistLink" target="_blank" rel="noopener">View profile&ensp;&#8599;</a>
+        </div>
+      </div>
+
+      <div class="action">
+        <a class="action-row" id="rowInstagram" target="_blank" rel="noopener">
+          <span>Instagram</span><span class="action-mark">&#8599;</span>
+        </a>
+      </div>
+
+      <div class="action">
+        <button class="action-row" id="rowPrice">
+          <span>Request price</span><span class="action-mark">&rarr;</span>
+        </button>
+      </div>
+
+      <div class="action">
+        <button class="action-row" id="rowSave">
+          <span>Save</span><span class="action-mark action-saved" id="saveMark">+</span>
+        </button>
+      </div>
+
+      <div class="action">
+        <button class="action-row" id="rowShare">
+          <span>Share</span><span class="action-mark">&#8599;</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-claim">Public screen. Private control.</p>
+      <p class="foot-note">Your actions stay on your phone. Only the artwork appears on the window.</p>
+    </footer>
+  </main>
+
+  <!-- price request sheet -->
+  <div class="backdrop" id="backdrop"></div>
+  <section class="sheet" id="sheet" aria-hidden="true">
+    <button class="sheet-close" id="sheetClose" aria-label="Close">&times;</button>
+    <div id="sheetForm">
+      <p class="eyebrow">Request price</p>
+      <h2 class="sheet-head">Interested in this work?</h2>
+      <p class="sheet-ref" id="sheetRef"></p>
+      <form id="requestForm" novalidate>
+        <input class="field" id="fName" name="name" placeholder="Name" autocomplete="name" required />
+        <input class="field" id="fEmail" name="email" type="email" placeholder="Email" autocomplete="email" required />
+        <textarea class="field" id="fMessage" name="message" placeholder="Message (optional)" rows="3"></textarea>
+        <p class="form-error hidden" id="formError">Please add your name and a valid email.</p>
+        <button type="submit" class="solid-btn" id="submitBtn">Request details</button>
+      </form>
+    </div>
+    <div class="hidden" id="sheetSuccess">
+      <h2 class="sheet-head serif">Thank you.</h2>
+      <p class="sheet-sub">The gallery will be in touch shortly.</p>
+      <button class="solid-btn" id="successClose">Back to the gallery</button>
+    </div>
+  </section>
+
+  <!-- session timeout warning -->
+  <div class="timeout hidden" id="timeout">
+    <div class="timeout-card">
+      <h3 class="timeout-head">Still exploring?</h3>
+      <button class="solid-btn" id="keepBtn">Keep control</button>
+    </div>
+  </div>
+
+  <!-- session ended -->
+  <div class="ended hidden" id="ended">
+    <p class="eyebrow">Session ended</p>
+    <h2 class="ended-head">The window returned to&nbsp;the&nbsp;exhibition.</h2>
+    <button class="solid-btn" id="reclaimBtn">Take control again</button>
+    <button class="ghost-btn" id="continueBtn">Continue on your phone</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/control/control.js"></script>
+</body>
+</html>
