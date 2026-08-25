@@ -187,10 +187,13 @@
     el.qrImg.src = `/qr/${encodeURIComponent(screenId)}.svg`;
     el.qrImgLarge.src = `/qr/${encodeURIComponent(screenId)}.svg`;
 
-    artworks.forEach((a) => {
-      const pre = new Image();
-      pre.src = a.image;
-    });
+    // warm the full playlist only after the first work is on stage
+    setTimeout(() => {
+      artworks.forEach((a) => {
+        const pre = new Image();
+        pre.src = a.image;
+      });
+    }, 1500);
 
     setArtwork(artworks[0], 0);
     connect();

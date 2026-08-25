@@ -240,8 +240,9 @@ const server = http.createServer(app);
 app.use(express.json({ limit: '64kb' }));
 app.use(express.text({ type: ['text/*'], limit: '64kb' })); // sendBeacon fallback
 
-// no HTTP caching while the product iterates — a kiosk deployment can
-// raise this again (assets are LAN-local anyway)
+// artworks are immutable-ish and heavy — cache them hard; everything else
+// (HTML/CSS/JS, all tiny) stays uncached while the product iterates
+app.use('/artworks', express.static(path.join(ROOT, 'public', 'artworks'), { maxAge: '7d', immutable: true }));
 app.use(express.static(path.join(ROOT, 'public'), { maxAge: 0, index: false }));
 
 app.get('/', (_req, res) => res.sendFile(path.join(ROOT, 'public', 'index.html')));

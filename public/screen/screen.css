@@ -373,12 +373,9 @@ body {
   z-index: 7; /* stays visible on the CTA interstitial */
 }
 
-.screen-credit img {
-  width: 30px;
-  height: 30px;
-}
-
-/* narrow windows: reduce the top line gracefully */
+/* narrow windows: reduce the top line gracefully
+   (the window app targets large landscape displays; below that the
+   credit yields to brand + index) */
 
 @media (max-width: 1199px) {
   .brand-sub {
@@ -386,8 +383,8 @@ body {
   }
 }
 
-@media (max-width: 899px) {
-  .screen-credit span {
+@media (max-width: 999px) {
+  .screen-credit {
     display: none;
   }
 }

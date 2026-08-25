@@ -117,10 +117,25 @@
     }
   }
 
+  const preloaded = new Set();
+
+  function preloadAround(i) {
+    const n = artworks.length;
+    for (const k of [i, i + 1, i - 1]) {
+      const a = artworks[((k % n) + n) % n];
+      if (a && !preloaded.has(a.id)) {
+        preloaded.add(a.id);
+        const im = new Image();
+        im.src = a.image;
+      }
+    }
+  }
+
   function renderArtwork(i, { silent } = {}) {
     if (!artworks.length) return;
     index = ((i % artworks.length) + artworks.length) % artworks.length;
     const a = artwork();
+    preloadAround(index);
 
     el.artImg.classList.add('fading');
     const pre = new Image();
@@ -507,11 +522,6 @@
 
     document.title = `${config.gallery} — You're in control`;
     el.brand.textContent = config.gallery;
-
-    artworks.forEach((a) => {
-      const pre = new Image();
-      pre.src = a.image;
-    });
 
     const requested = params.get('art');
     const startIndex = Math.max(

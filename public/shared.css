@@ -116,17 +116,13 @@ a {
   animation: pulse 2.4s ease-in-out infinite;
 }
 
-/* product credit — Ein Produkt by Urban Artist Club */
+/* product credit — Ein Produkt by Urban Artist Club
+   (text only until the original UAC badge artwork lands) */
 
 .product-credit {
   display: flex;
   align-items: center;
   gap: 11px;
-}
-
-.product-credit img {
-  width: 27px;
-  height: 27px;
 }
 
 .product-credit span {
